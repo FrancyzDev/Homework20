@@ -82,8 +82,10 @@ public class NotificationSystem
 
 class Program
 {
+    delegate int[] CountDelegate(int[] arr);
     static void Main()
     {
+        Console.WriteLine("HARD TASK");
         NotificationSystem system = new NotificationSystem();
         User alice = new User("A", Priority.Low);
         User bob = new User("Bob", Priority.Medium);
@@ -95,5 +97,21 @@ class Program
         system.SendNotification(NotificationType.Info, Priority.Low, "Info message");
         system.SendNotification(NotificationType.Warning, Priority.Medium, "Warn message");
         system.SendNotification(NotificationType.Error, Priority.High, "Error message");
+        Console.WriteLine("\nBASIC TASK");
+        int[] numbers = { -3, 5, 0, -1, 4, 0, -2, 7 };
+        CountDelegate countNumbers = delegate (int[] arr)
+        {
+            int negativeCount = 0, positiveCount = 0, zeroCount = 0;
+            foreach (int num in arr)
+            {
+                if (num < 0) negativeCount++;
+                else if (num > 0) positiveCount++;
+                else zeroCount++;
+            }
+            return new int[] { negativeCount, positiveCount, zeroCount };
+        };
+        int[] result = countNumbers(numbers);
+        Console.WriteLine($"Negative: {result[0]}, Positive: {result[1]}, Zero: {result[2]}");
     }
 }
+
